@@ -1,0 +1,19 @@
+name: FTP Deploy
+
+on: push
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Upload via FTP
+        uses: sebastianpopp/ftp-action@v2.1.0
+        with:
+          host: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          localDir: .dist
+          remoteDir: /
